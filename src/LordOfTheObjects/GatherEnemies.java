@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class GatherEnemies {
 
 	private Enemy[] enemies;
-	private static int MAX_ENEMIES;
+	private static int MAX_ENEMIES = 3;
 	private int numEnemies;
 
 	{
@@ -34,6 +34,7 @@ public class GatherEnemies {
 
 	public void addEnemy(Enemy enemy) {
 
+		// System.out.println(numEnemies);
 		if (numEnemies == MAX_ENEMIES) {
 			System.out.println("You already have three enemies.");
 		} else {
@@ -41,7 +42,7 @@ public class GatherEnemies {
 				if (enemies[i] == null) {
 					enemies[i] = enemy;
 					numEnemies++;
-					System.out.println(enemies + "\nis parked in spot: " + (i + 1) + "\n");
+					// System.out.println(enemies[i] + "\nis assigned in spot: " + (i + 1) + "\n");
 					break;
 				}
 			}

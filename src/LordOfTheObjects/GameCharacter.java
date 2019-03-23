@@ -15,6 +15,7 @@ public class GameCharacter {
 
 	public int takeDamage(int amt) {
 		// take damage and return int for health left
+		this.health = this.health - amt;
 		return 0;
 	}
 

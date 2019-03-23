@@ -15,8 +15,10 @@ public class Enemy extends GameCharacter {
 
 	}
 
-	public String[] getAttackScenarios() {
-		return attackScenarios;
+	public String getAttackScenarios(int attackScenario) {
+		String result;
+		result = this.attackScenarios[attackScenario];
+		return result;
 	}
 
 	public void setAttackScenarios(String[] attackScenarios) {
