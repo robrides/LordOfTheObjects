@@ -2,21 +2,24 @@ package LordOfTheObjects;
 
 public class Player extends GameCharacter {
 
-	private String weapon;
+	private String bandName;
 
-	
-	
-	public Player(String name, int health) {
+	public Player(String name, int health, String bandName) {
 		super(name, health);
 		// TODO Auto-generated constructor stub
+		this.bandName = bandName;
+	}
+	
+	public String getBandName() {
+		return bandName;
 	}
 
-	public String getWeapon() {
-		return weapon;
+	public void setBandName(String bandName) {
+		this.bandName = bandName;
 	}
 
-	public void setWeapon(String weapon) {
-		this.weapon = weapon;
+	public String toString() {
+		return "Player: " + this.getName() + ", Band: " + this.getBandName() + ", Current Health: " + this.getHealth();
 	}
 	
 	

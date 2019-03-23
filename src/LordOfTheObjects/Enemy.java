@@ -1,43 +1,38 @@
 package LordOfTheObjects;
 
-public class Enemy extends GameCharacter{
+import java.util.Arrays;
+
+public class Enemy extends GameCharacter {
 
 	private int attackEffect;
-	private String[] enemy;
-	
-	
-	public Enemy(String name, int health) {
+	private String[] attackScenarios;
+
+	public Enemy(String name, int health, int attackEffect, String... attackScenarios) {
 		super(name, health);
 		// TODO Auto-generated constructor stub
+		this.attackEffect = attackEffect;
+		this.attackScenarios = attackScenarios;
+
 	}
 
-
-	public int enemyAttack() {
-		
-		
-		return 0;
+	public String[] getAttackScenarios() {
+		return attackScenarios;
 	}
 
+	public void setAttackScenarios(String[] attackScenarios) {
+		this.attackScenarios = attackScenarios;
+	}
 
 	public int getAttackEffect() {
 		return attackEffect;
 	}
 
-
 	public void setAttackEffect(int attackEffect) {
 		this.attackEffect = attackEffect;
 	}
 
-
-	public String[] getEnemy() {
-		return enemy;
+	public String toString() {
+		return "Enemy: " + this.getName() + ", Attack Effect: " +  this.getAttackEffect() + "\nAttack Scenarios: " + Arrays.toString(attackScenarios);
 	}
 
-
-	public void setEnemy(String[] enemy) {
-		this.enemy = enemy;
-	}
-	
-	
-	
 }
