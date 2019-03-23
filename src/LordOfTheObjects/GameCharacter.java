@@ -13,10 +13,9 @@ public class GameCharacter {
 		this.health = health;
 	}
 
-	public int takeDamage(int amt) {
+	public void takeDamage(int amt) {
 		// take damage and return int for health left
 		this.health = this.health - amt;
-		return 0;
 	}
 
 	public String getName() {
