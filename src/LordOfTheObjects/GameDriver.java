@@ -76,7 +76,7 @@ public class GameDriver {
 
 	public void printStoryLine1() {
 		System.out.println("\nYou have just woken up in an alley. Your head is pounding, your clothes are \nwet,"
-				+ "and you’ve just realized you are " + playerName + " and your band " + bandName
+				+ "and you’ve just realized you are " + player.getName() + " and your band " + player.getBandName()
 				+ " has a concert across \ntown in 45 minutes. You pick yourself up and start walking toward the street \nwhere you see a corner store. You go in to ask for directions when Joe the junkie \njumps out of nowhere with a broken bottle and tries to attack you! \n\n");
 
 	}
@@ -85,7 +85,7 @@ public class GameDriver {
 
 		System.out.println(
 				"You sprint out of the corner store and down Main Street for a few blocks. \nBloody, bruised, and wet, you make your way towards the venue when you \nrealize it’s 2019 and you can totally just call an Uber. The uber arrives \nand takes you close to the venue, but the road is blocked off so you have \nto walk the rest of the way. All of the sudden a CRAZED fan yells “Is that \n"
-						+ playerName + " from " + bandName + " and starts booking it towards you.\n");
+						+ player.getName() + " from " + player.getBandName() + " and starts booking it towards you.\n");
 	}
 
 	public void printStoryLine3() {
@@ -141,13 +141,14 @@ public class GameDriver {
 					}
 					if (choice == 1) {
 						runMethod();
+						break;
 					}
 				}
 			}
 		} else if (story == 2) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(enemies.getEnemies()[1].getAttackScenarios(i));
-				System.out.println("\nYour attack caused 30 in damage!!!");
+				System.out.println("\nYour attack caused 30 points in damage!!!");
 				enemy2.takeDamage(30);
 				System.out.println(enemy2.getName() + "'s health is: " + enemy2.getHealth() + "\n");
 				healthReduction = (int) (Math.random() * 20);
@@ -169,13 +170,14 @@ public class GameDriver {
 					}
 					if (choice == 1) {
 						runMethod();
+						break;
 					}
 				}
 			}
 		} else if (story == 3) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(enemies.getEnemies()[2].getAttackScenarios(i));
-				System.out.println("\nYour attack caused 30 in damage!!!");
+				System.out.println("\nYour attack caused 30 points in damage!!!");
 				enemy3.takeDamage(30);
 				System.out.println(enemy3.getName() + "'s health is: " + enemy3.getHealth() + "\n");
 				healthReduction = (int) (Math.random() * 20);
@@ -197,6 +199,7 @@ public class GameDriver {
 					}
 					if (choice == 1) {
 						runMethod();
+						break;
 					}
 				}
 			}
@@ -206,11 +209,12 @@ public class GameDriver {
 	public void runMethod() {
 
 		System.out.println(enemies.getEnemies()[story - 1].getAttackScenarios(3));
-		choice = 0;
+		choice = 1;
 
 	}
 
 	public void playGame() {
+		int endChoice = 0;
 		gameInitialization();
 		printIntro();
 		playerInitialization();
@@ -233,10 +237,17 @@ public class GameDriver {
 				if (player.getHealth() <= 0) {
 					break;
 				}
+				if (choice == 1) {
+					choice = 3;
+				}
 			}
 			if (choice == 1) {
 				runMethod();
-				break;
+				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+				endChoice = kb.nextInt();
+				if (endChoice == 2) {
+					break;
+				}
 			}
 			if (choice != 3) {
 				story = 2;
@@ -249,10 +260,17 @@ public class GameDriver {
 					if (player.getHealth() <= 0) {
 						break;
 					}
+					if (choice == 1) {
+						choice = 3;
+					}
 				}
 				if (choice == 1) {
 					runMethod();
-					break;
+					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+					endChoice = kb.nextInt();
+					if (endChoice == 2) {
+						break;
+					}
 				}
 			}
 			if (choice != 3) {
@@ -266,15 +284,21 @@ public class GameDriver {
 					if (player.getHealth() <= 0) {
 						break;
 					}
+					if (choice == 1) {
+						choice = 3;
+					}
 				}
 				if (choice == 1) {
 					runMethod();
-					break;
+					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+					endChoice = kb.nextInt();
+					if (endChoice == 2) {
+						break;
+					}
 				}
 			}
 			if (choice != 3) {
 				printWinStory();
-				int endChoice = 0;
 				printMusicNotes();
 				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
 				endChoice = kb.nextInt();
