@@ -4,12 +4,14 @@ public class Player extends GameCharacter {
 
 	private String bandName;
 
+	// Player constructor
 	public Player(String name, int health, String bandName) {
 		super(name, health);
-		// TODO Auto-generated constructor stub
 		this.bandName = bandName;
 	}
 	
+	
+	// Getters and setters
 	public String getBandName() {
 		return bandName;
 	}

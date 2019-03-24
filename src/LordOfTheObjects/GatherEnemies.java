@@ -6,14 +6,23 @@ public class GatherEnemies {
 	private static int MAX_ENEMIES = 3;
 	private int numEnemies;
 
+	// Instantiate an Enemy array
 	{
 		enemies = new Enemy[MAX_ENEMIES];
 	}
 
+	// GatherEnemies no-Args constructor
 	public GatherEnemies() {
 
 	}
 
+	// Setter and getter
+	public void setEnemies(Enemy[] enemies) {
+		this.numEnemies = 0;
+		this.enemies = enemies;
+	}
+
+	// Gather enemies in an array copy
 	public Enemy[] getEnemies() {
 
 		Enemy[] enemiesCopy = new Enemy[this.numEnemies];
@@ -25,22 +34,16 @@ public class GatherEnemies {
 		return enemiesCopy;
 	}
 
-	public void setEnemies(Enemy[] enemies) {
-		this.numEnemies = 0;
-		this.enemies = enemies;
-	}
-
+	// Add enemies
 	public void addEnemy(Enemy enemy) {
 
-		// System.out.println(numEnemies);
 		if (numEnemies == MAX_ENEMIES) {
-			System.out.println("You already have three enemies.");
+			System.out.println("You already have max enemies.");
 		} else {
 			for (int i = 0; i < enemies.length; i++) {
 				if (enemies[i] == null) {
 					enemies[i] = enemy;
 					numEnemies++;
-					// System.out.println(enemies[i] + "\nis assigned in spot: " + (i + 1) + "\n");
 					break;
 				}
 			}

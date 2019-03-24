@@ -22,9 +22,9 @@ public class GameDriver {
 	// establish achievement method
 	// game play method to interact with other methods
 
+	// Instantiate and setup enemy objects with their attack scenarios as well as gather them in an array
 	public void gameInitialization() {
 
-		// Instantiate and setup enemies
 		enemies = new GatherEnemies();
 		enemy1 = new Enemy("Joe the junkie", 90,
 				"You pick up a slim jim and hit the junkie over the head\nThe junkie lunges at you and cuts your arm\n",
@@ -51,6 +51,7 @@ public class GameDriver {
 		enemies.addEnemy(enemy3);
 	}
 
+	// Instantiate and setup the player object
 	public void playerInitialization() {
 
 		System.out.println("Please enter your musician name >>");
@@ -75,6 +76,7 @@ public class GameDriver {
 	}
 
 	public void printStoryLine1() {
+		
 		System.out.println("\nYou have just woken up in an alley. Your head is pounding, your clothes are \nwet,"
 				+ "and you’ve just realized you are " + player.getName() + " and your band " + player.getBandName()
 				+ " has a concert across \ntown in 45 minutes. You pick yourself up and start walking toward the street \nwhere you see a corner store. You go in to ask for directions when Joe the junkie \njumps out of nowhere with a broken bottle and tries to attack you! \n\n");
@@ -86,6 +88,7 @@ public class GameDriver {
 		System.out.println(
 				"You sprint out of the corner store and down Main Street for a few blocks. \nBloody, bruised, and wet, you make your way towards the venue when you \nrealize it’s 2019 and you can totally just call an Uber. The uber arrives \nand takes you close to the venue, but the road is blocked off so you have \nto walk the rest of the way. All of the sudden a CRAZED fan yells “Is that \n"
 						+ player.getName() + " from " + player.getBandName() + " and starts booking it towards you.\n");
+		
 	}
 
 	public void printStoryLine3() {
@@ -101,6 +104,7 @@ public class GameDriver {
 
 	}
 
+	// Get input from user throughout the play of the game
 	public void getMenuChoice() {
 
 		do {
@@ -113,6 +117,7 @@ public class GameDriver {
 
 	}
 
+	// Logic for fight menu choice
 	public void fightMethod() {
 		int healthReduction = 0;
 
@@ -206,6 +211,7 @@ public class GameDriver {
 		}
 	}
 
+	// Logic for player run choice
 	public void runMethod() {
 
 		System.out.println(enemies.getEnemies()[story - 1].getAttackScenarios(3));
@@ -214,7 +220,16 @@ public class GameDriver {
 		System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 
 	}
+	
+	// Ask the player if they would like to play again
+	public int playAgain() {
+		int againChoice; 
+		System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+		againChoice = kb.nextInt();		
+		return againChoice;
+	}
 
+	// Main Game Driver logic
 	public void playGame() {
 		int endChoice = 0;
 		gameInitialization();
@@ -241,8 +256,7 @@ public class GameDriver {
 			} else if (choice == 2) {
 				fightMethod();
 				if (player.getHealth() <= 0) {
-					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-					endChoice = kb.nextInt();
+					endChoice = playAgain();
 					if (endChoice == 2) {
 						break;
 					}
@@ -250,8 +264,7 @@ public class GameDriver {
 			}
 			if (choice == 1) {
 				runMethod();
-				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-				endChoice = kb.nextInt();
+				endChoice = playAgain();
 				if (endChoice == 2) {
 					break;
 				}
@@ -265,8 +278,7 @@ public class GameDriver {
 				} else if (choice == 2) {
 					fightMethod();
 					if (player.getHealth() <= 0) {
-						System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-						endChoice = kb.nextInt();
+						endChoice = playAgain();
 						if (endChoice == 2) {
 							break;
 						}
@@ -274,8 +286,7 @@ public class GameDriver {
 				}
 				if (choice == 1) {
 					runMethod();
-					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-					endChoice = kb.nextInt();
+					endChoice = playAgain();
 					if (endChoice == 2) {
 						break;
 					}
@@ -290,8 +301,7 @@ public class GameDriver {
 				} else if (choice == 2) {
 					fightMethod();
 					if (player.getHealth() <= 0) {
-						System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-						endChoice = kb.nextInt();
+						endChoice = playAgain();
 						if (endChoice == 2) {
 							break;
 						}
@@ -299,8 +309,7 @@ public class GameDriver {
 				}
 				if (choice == 1) {
 					runMethod();
-					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-					endChoice = kb.nextInt();
+					endChoice = playAgain();
 					if (endChoice == 2) {
 						break;
 					}
@@ -308,8 +317,7 @@ public class GameDriver {
 			}
 			if (choice != 3 && player.getHealth() > 0) {
 				printWinStory();
-				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-				endChoice = kb.nextInt();
+				endChoice = playAgain();
 				if (endChoice == 2) {
 					break;
 				}

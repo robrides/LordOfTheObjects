@@ -7,7 +7,7 @@ public class GameApp {
 		// Instantiate GameDriver
 		GameDriver game = new GameDriver();
 
-		// call GameDriver
+		// call GameDriver main logic
 		game.playGame();
 
 	}
