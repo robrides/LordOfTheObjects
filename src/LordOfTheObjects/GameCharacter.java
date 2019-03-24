@@ -7,17 +7,18 @@ public class GameCharacter {
 	private final int MAX_HEALTH = 100;
 	
 	
-	
+	// Character constructor to be inherited
 	public GameCharacter(String name, int health) {
 		this.name = name;
 		this.health = health;
 	}
 
+	// take damage decreasing health
 	public void takeDamage(int amt) {
-		// take damage and return int for health left
 		this.health = this.health - amt;
 	}
 
+	// Getters and setters
 	public String getName() {
 		return name;
 	}

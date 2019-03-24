@@ -6,9 +6,9 @@ public class Enemy extends GameCharacter {
 
 	private String[] attackScenarios;
 
+	// Enemy constructor with inheritance from GameCharacter
 	public Enemy(String name, int health, String... attackScenarios) {
 		super(name, health);
-		// TODO Auto-generated constructor stub
 		this.attackScenarios = attackScenarios;
 
 	}

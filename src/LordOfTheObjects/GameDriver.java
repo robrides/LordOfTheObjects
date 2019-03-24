@@ -209,7 +209,9 @@ public class GameDriver {
 	public void runMethod() {
 
 		System.out.println(enemies.getEnemies()[story - 1].getAttackScenarios(3));
-		choice = 1;
+		choice = 0;
+		player.takeDamage(player.getHealth());
+		System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 
 	}
 
@@ -224,9 +226,13 @@ public class GameDriver {
 		System.out.println(enemies.toString() + "\n\n");
 
 		do {
-			player.setHealth(100);
-			choice = 0;
 			System.out.println("\nGet ready for adventure...\n\n\n");
+			player.setHealth(100);
+			enemy1.setHealth(90);
+			enemy2.setHealth(90);
+			enemy3.setHealth(90);
+			choice = 0;
+			endChoice = 0;
 			story = 1;
 			printStoryLine1();
 			getMenuChoice();
@@ -235,10 +241,11 @@ public class GameDriver {
 			} else if (choice == 2) {
 				fightMethod();
 				if (player.getHealth() <= 0) {
-					break;
-				}
-				if (choice == 1) {
-					choice = 3;
+					System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+					endChoice = kb.nextInt();
+					if (endChoice == 2) {
+						break;
+					}
 				}
 			}
 			if (choice == 1) {
@@ -249,7 +256,7 @@ public class GameDriver {
 					break;
 				}
 			}
-			if (choice != 3) {
+			if (choice != 3 && player.getHealth() > 0) {
 				story = 2;
 				printStoryLine2();
 				getMenuChoice();
@@ -258,10 +265,11 @@ public class GameDriver {
 				} else if (choice == 2) {
 					fightMethod();
 					if (player.getHealth() <= 0) {
-						break;
-					}
-					if (choice == 1) {
-						choice = 3;
+						System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+						endChoice = kb.nextInt();
+						if (endChoice == 2) {
+							break;
+						}
 					}
 				}
 				if (choice == 1) {
@@ -273,7 +281,7 @@ public class GameDriver {
 					}
 				}
 			}
-			if (choice != 3) {
+			if (choice != 3 && player.getHealth() > 0) {
 				story = 3;
 				printStoryLine3();
 				getMenuChoice();
@@ -282,10 +290,11 @@ public class GameDriver {
 				} else if (choice == 2) {
 					fightMethod();
 					if (player.getHealth() <= 0) {
-						break;
-					}
-					if (choice == 1) {
-						choice = 3;
+						System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+						endChoice = kb.nextInt();
+						if (endChoice == 2) {
+							break;
+						}
 					}
 				}
 				if (choice == 1) {
@@ -297,9 +306,8 @@ public class GameDriver {
 					}
 				}
 			}
-			if (choice != 3) {
+			if (choice != 3 && player.getHealth() > 0) {
 				printWinStory();
-				printMusicNotes();
 				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
 				endChoice = kb.nextInt();
 				if (endChoice == 2) {
@@ -307,20 +315,12 @@ public class GameDriver {
 				}
 			}
 
-		} while (choice != 3 && (player.getHealth() > 0));
+		} while (choice != 3 && endChoice < 2);
 
-		System.out.println("\n\n\nThank you for playing Venture to the Venue!");
-
-		// Prompt for character name
-
-		// present game menu
-		// request options from player
+		System.out.println("\n\n\nThank you for playing Venture to the Venue!\n");
+		printMusicNotes();
 
 	}
 
-	public int enemyAttack() {
-
-		return 0;
-	}
 
 }
