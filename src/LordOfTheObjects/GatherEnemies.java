@@ -1,7 +1,5 @@
 package LordOfTheObjects;
 
-import java.util.Arrays;
-
 public class GatherEnemies {
 
 	private Enemy[] enemies;
@@ -51,7 +49,13 @@ public class GatherEnemies {
 	}
 
 	public String toString() {
-		return "Enemies: " + Arrays.toString(enemies);
+		String enemies = "Your opponents...\n";
+		
+		for (int i = 0; i < this.enemies.length; i++) {
+			enemies += (this.enemies[i].getName()) + "\n";
+		}
+		
+		return enemies;
 	}
 
 }

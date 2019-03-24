@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameDriver {
 
-	// Instantiate and setup GatherEnemies
+	// Setup game objects and variables
 	private GatherEnemies enemies;
 	private Player player;
 	private Enemy enemy1;
@@ -21,14 +21,6 @@ public class GameDriver {
 	// death scenarios and random output of a few
 	// establish achievement method
 	// game play method to interact with other methods
-
-	public void printIntro() {
-
-		System.out.println("Welcome .....");
-		// back story
-		System.out.println("Backstory");
-
-	}
 
 	public void gameInitialization() {
 
@@ -59,18 +51,19 @@ public class GameDriver {
 		enemies.addEnemy(enemy3);
 	}
 
-	public void playerInitialization(Player player) {
+	public void playerInitialization() {
 
 		System.out.println("Please enter your musician name >>");
 		playerName = kb.nextLine();
 
 		System.out.println("Please enter your band name >>");
 		bandName = kb.nextLine();
+		player = new Player(playerName, 100, bandName);
 		player.setHealth(100);
 
 	}
 
-	public void printBackStory() {
+	public void printIntro() {
 
 		System.out.println("Welcome to Venture to the Venue.\n");
 
@@ -104,7 +97,7 @@ public class GameDriver {
 	public void printWinStory() {
 
 		System.out.println(
-				"You finally make it into the venue and your venture is over. You go on to have the \nperformance of a lifetime and get signed by “The Big Record Label.” You join the \nilluminati who hides the 3 deaths you were responsible for and you become supreme \noverload of the music industry. You live happily ever after and never die because \nyou sold your soul to the devil. \nThe End.");
+				"You finally make it into the venue and your venture is over. You go on to have the \nperformance of a lifetime and get signed by “The Big Record Label.” You join the \nilluminati who hides the 3 deaths you were responsible for and you become supreme \noverload of the music industry. You live happily ever after and never die because \nyou sold your soul to the devil. \n\nThe End.");
 
 	}
 
@@ -114,6 +107,7 @@ public class GameDriver {
 
 			System.out.println("Do you : (1. Run) (2. Fight) (3. Quit Game)\n");
 			choice = kb.nextInt();
+			System.out.println();
 
 		} while (choice != 1 && choice != 2 && choice != 3);
 
@@ -125,16 +119,16 @@ public class GameDriver {
 		if (story == 1) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(enemies.getEnemies()[0].getAttackScenarios(i));
-				System.out.println("Your attack caused 30 in damage!!!");
+				System.out.println("\nYour attack caused 30 points in damage!!!");
 				enemy1.takeDamage(30);
-				System.out.println(enemy1.getName() + " health is: " + enemy1.getHealth());
+				System.out.println(enemy1.getName() + "'s health is: " + enemy1.getHealth() + "\n");
 				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " in health reducation to " + player.getName());
+				System.out.println(healthReduction + " points in health reducation to " + player.getName());
 				player.takeDamage(healthReduction);
 				if (player.getHealth() <= 0) {
 					break;
 				}
-				System.out.println("\nCurrent health: " + player.getHealth());
+				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 				if (i == 2) {
 					break;
 				} else {
@@ -153,17 +147,16 @@ public class GameDriver {
 		} else if (story == 2) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(enemies.getEnemies()[1].getAttackScenarios(i));
-				System.out.println("Your attack caused 30 in damage!!!");
+				System.out.println("\nYour attack caused 30 in damage!!!");
 				enemy2.takeDamage(30);
-				System.out.println(enemy2.getName() + " health is: " + enemy2.getHealth());
+				System.out.println(enemy2.getName() + "'s health is: " + enemy2.getHealth() + "\n");
 				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " in health reducation to " + player.getName());
-				System.out.println(healthReduction + " in health reducation\n");
+				System.out.println(healthReduction + " points in health reducation to " + player.getName());
 				player.takeDamage(healthReduction);
 				if (player.getHealth() <= 0) {
 					break;
 				}
-				System.out.println("\nCurrent health: " + player.getHealth());
+				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 				if (i == 2) {
 					break;
 				} else {
@@ -182,17 +175,16 @@ public class GameDriver {
 		} else if (story == 3) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println(enemies.getEnemies()[2].getAttackScenarios(i));
-				System.out.println("Your attack caused 30 in damage!!!");
+				System.out.println("\nYour attack caused 30 in damage!!!");
 				enemy3.takeDamage(30);
-				System.out.println(enemy3.getName() + " health is: " + enemy3.getHealth());
+				System.out.println(enemy3.getName() + "'s health is: " + enemy3.getHealth() + "\n");
 				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " in health reducation to " + player.getName());
-				System.out.println(healthReduction + " in health reducation\n");
+				System.out.println(healthReduction + " points in health reducation to " + player.getName());
 				player.takeDamage(healthReduction);
 				if (player.getHealth() <= 0) {
 					break;
 				}
-				System.out.println("\nCurrent health: " + player.getHealth());
+				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 				if (i == 2) {
 					break;
 				} else {
@@ -220,16 +212,17 @@ public class GameDriver {
 
 	public void playGame() {
 		gameInitialization();
-		printBackStory();
-		player = new Player(playerName, 100, bandName);
-		playerInitialization(player);
+		printIntro();
+		playerInitialization();
 		printMusicNotes();
-		// System.out.println(player.toString());
+		System.out.println();
+		System.out.println(player.toString() + "\n\n");
+		System.out.println(enemies.toString() + "\n\n");
 
 		do {
 			player.setHealth(100);
 			choice = 0;
-			System.out.println("\n\n\nGet ready for adventure...\n\n\n");
+			System.out.println("\nGet ready for adventure...\n\n\n");
 			story = 1;
 			printStoryLine1();
 			getMenuChoice();
@@ -245,42 +238,49 @@ public class GameDriver {
 				runMethod();
 				break;
 			}
-			story = 2;
-			printStoryLine2();
-			getMenuChoice();
-			if (choice == 3) {
-				break;
-			} else if (choice == 2) {
-				fightMethod();
-				if (player.getHealth() <= 0) {
+			if (choice != 3) {
+				story = 2;
+				printStoryLine2();
+				getMenuChoice();
+				if (choice == 3) {
+					break;
+				} else if (choice == 2) {
+					fightMethod();
+					if (player.getHealth() <= 0) {
+						break;
+					}
+				}
+				if (choice == 1) {
+					runMethod();
 					break;
 				}
 			}
-			if (choice == 1) {
-				runMethod();
-				break;
-			}
-			story = 3;
-			printStoryLine3();
-			getMenuChoice();
-			if (choice == 3) {
-				break;
-			} else if (choice == 2) {
-				fightMethod();
-				if (player.getHealth() <= 0) {
+			if (choice != 3) {
+				story = 3;
+				printStoryLine3();
+				getMenuChoice();
+				if (choice == 3) {
+					break;
+				} else if (choice == 2) {
+					fightMethod();
+					if (player.getHealth() <= 0) {
+						break;
+					}
+				}
+				if (choice == 1) {
+					runMethod();
 					break;
 				}
 			}
-			if (choice == 1) {
-				runMethod();
-				break;
-			}
-			printWinStory();
-			int endChoice = 0;
-			System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-			endChoice = kb.nextInt();
-			if (endChoice == 2) {
-				break;
+			if (choice != 3) {
+				printWinStory();
+				int endChoice = 0;
+				printMusicNotes();
+				System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
+				endChoice = kb.nextInt();
+				if (endChoice == 2) {
+					break;
+				}
 			}
 
 		} while (choice != 3 && (player.getHealth() > 0));

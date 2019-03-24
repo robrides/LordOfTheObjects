@@ -22,6 +22,4 @@ public class Player extends GameCharacter {
 		return "Player: " + this.getName() + ", Band: " + this.getBandName() + ", Current Health: " + this.getHealth();
 	}
 	
-	
-	
 }
