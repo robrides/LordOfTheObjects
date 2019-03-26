@@ -22,7 +22,8 @@ public class GameDriver {
 	// establish achievement method
 	// game play method to interact with other methods
 
-	// Instantiate and setup enemy objects with their attack scenarios as well as gather them in an array
+	// Instantiate and setup enemy objects with their attack scenarios as well as
+	// gather them in an array
 	public void gameInitialization() {
 
 		enemies = new GatherEnemies();
@@ -31,20 +32,20 @@ public class GameDriver {
 				"You throw a box of tampons and hit the junkie in the eye.\n"
 						+ "The junkie throws the broken bottle at you and hits you in the head \n",
 				"You find a fire extinguisher and knock the junkie out. \nThe junkie dies.",
-				"The junkie chased after you and stabbed you with the broken bottle, you \nimmediately contract AIDS and die. \nGame Over.");
+				"The junkie chased after you and stabbed you with the broken bottle, you \nimmediately contract AIDS and die. \n\nGame Over.");
 		enemy2 = new Enemy("CRAZED Fan!!!", 90,
 				"You give the fan an autograph\n"
 						+ "The fan tells you they will scream louder if you don’t let them back-stage",
 				"You give them back-stage passes and beg them not to cause a scene.\n"
 						+ "The fan is still not satisfied and insists on meeting the rest of the band.",
 				"You agree to let the fan come with you to meet the band.\nThey immediately have a heart attack from pure excitement and die.",
-				"The crazed fan’s outburst drew everyone's attention towards you and a mob is formed. \nYou try to outrun them, but are no match for the hundreds of people barreling towards \nyou and you are trampled to death by your own fans. \nGame Over.");
+				"The crazed fan’s outburst drew everyone's attention towards you and a mob is formed. \nYou try to outrun them, but are no match for the hundreds of people barreling towards \nyou and you are trampled to death by your own fans. \n\nGame Over.");
 		enemy3 = new Enemy("Bo the Bouncer", 90,
 				"You kick him square in the nuts\n" + "He drops you and you land on your ankle funny.",
 				"You dig a big piece of glass out of your arm from when the junkie attacked \nyou and use it to slice open a large gash on the bouncers face.\n"
 						+ "The bouncer back hands you right in the jaw.",
 				"One of your bandmates spots you and throws you a guitar, you beat the bouncer with it.\nThe bouncer dies from his wounds",
-				"The bouncer throws you out onto the sidewalk. Some millennials on motorized scooters \nare too busy hitting their Juuls to realise you are laying in their path. They run \nover your neck which snaps you die instantly. \nGame Over.");
+				"The bouncer throws you out onto the sidewalk. Some millennials on motorized scooters \nare too busy hitting their Juuls to realise you are laying in their path. They run \nover your neck which snaps you die instantly. \n\nGame Over.");
 
 		enemies.addEnemy(enemy1);
 		enemies.addEnemy(enemy2);
@@ -76,7 +77,7 @@ public class GameDriver {
 	}
 
 	public void printStoryLine1() {
-		
+
 		System.out.println("\nYou have just woken up in an alley. Your head is pounding, your clothes are \nwet,"
 				+ "and you’ve just realized you are " + player.getName() + " and your band " + player.getBandName()
 				+ " has a concert across \ntown in 45 minutes. You pick yourself up and start walking toward the street \nwhere you see a corner store. You go in to ask for directions when Joe the junkie \njumps out of nowhere with a broken bottle and tries to attack you! \n\n");
@@ -88,7 +89,7 @@ public class GameDriver {
 		System.out.println(
 				"You sprint out of the corner store and down Main Street for a few blocks. \nBloody, bruised, and wet, you make your way towards the venue when you \nrealize it’s 2019 and you can totally just call an Uber. The uber arrives \nand takes you close to the venue, but the road is blocked off so you have \nto walk the rest of the way. All of the sudden a CRAZED fan yells “Is that \n"
 						+ player.getName() + " from " + player.getBandName() + " and starts booking it towards you.\n");
-		
+
 	}
 
 	public void printStoryLine3() {
@@ -108,7 +109,6 @@ public class GameDriver {
 	public void getMenuChoice() {
 
 		do {
-
 			System.out.println("Do you : (1. Run) (2. Fight) (3. Quit Game)\n");
 			choice = kb.nextInt();
 			System.out.println();
@@ -116,21 +116,42 @@ public class GameDriver {
 		} while (choice != 1 && choice != 2 && choice != 3);
 
 	}
+	
+	public void printEndGame() {
+		System.out.println("\n\nThank you for playing Venture to the Venue.\n");
+		
+	}
+	
+	public void fightDisplay(int i) {
+		int healthReduction = 0;
+		
+		System.out.println(enemies.getEnemies()[story-1].getAttackScenarios(i));
+		if (story == 1) {
+			enemy1.takeDamage(30);
+			System.out.println(enemy1.getName() + "'s health is: " + enemy1.getHealth() + "\n");
+		}
+		else if (story == 2) {
+			enemy2.takeDamage(30);			
+			System.out.println(enemy2.getName() + "'s health is: " + enemy2.getHealth() + "\n");
+		}
+		else if (story == 3) {
+			enemy3.takeDamage(30);			
+			System.out.println(enemy3.getName() + "'s health is: " + enemy3.getHealth() + "\n");
+		}
+		System.out.println("\nYour attack caused 30 points in damage!!!");
+		healthReduction = (int) (Math.random() * 20);
+		System.out.println(healthReduction + " points in health reducation to " + player.getName());
+		player.takeDamage(healthReduction);
+	}
 
 	// Logic for fight menu choice
 	public void fightMethod() {
-		int healthReduction = 0;
 
 		if (story == 1) {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(enemies.getEnemies()[0].getAttackScenarios(i));
-				System.out.println("\nYour attack caused 30 points in damage!!!");
-				enemy1.takeDamage(30);
-				System.out.println(enemy1.getName() + "'s health is: " + enemy1.getHealth() + "\n");
-				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " points in health reducation to " + player.getName());
-				player.takeDamage(healthReduction);
+				fightDisplay(i);
 				if (player.getHealth() <= 0) {
+					printEndGame();
 					break;
 				}
 				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
@@ -139,7 +160,7 @@ public class GameDriver {
 				} else {
 					getMenuChoice();
 					if (choice == 3) {
-						System.out.println("Thank you for playing.");
+						printEndGame();  
 						break;
 					} else if (choice == 2) {
 						continue;
@@ -152,14 +173,9 @@ public class GameDriver {
 			}
 		} else if (story == 2) {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(enemies.getEnemies()[1].getAttackScenarios(i));
-				System.out.println("\nYour attack caused 30 points in damage!!!");
-				enemy2.takeDamage(30);
-				System.out.println(enemy2.getName() + "'s health is: " + enemy2.getHealth() + "\n");
-				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " points in health reducation to " + player.getName());
-				player.takeDamage(healthReduction);
+				fightDisplay(i);
 				if (player.getHealth() <= 0) {
+					printEndGame();
 					break;
 				}
 				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
@@ -168,7 +184,7 @@ public class GameDriver {
 				} else {
 					getMenuChoice();
 					if (choice == 3) {
-						System.out.println("Thank you for playing.");
+						printEndGame(); 
 						break;
 					} else if (choice == 2) {
 						continue;
@@ -181,14 +197,9 @@ public class GameDriver {
 			}
 		} else if (story == 3) {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(enemies.getEnemies()[2].getAttackScenarios(i));
-				System.out.println("\nYour attack caused 30 points in damage!!!");
-				enemy3.takeDamage(30);
-				System.out.println(enemy3.getName() + "'s health is: " + enemy3.getHealth() + "\n");
-				healthReduction = (int) (Math.random() * 20);
-				System.out.println(healthReduction + " points in health reducation to " + player.getName());
-				player.takeDamage(healthReduction);
+				fightDisplay(i);
 				if (player.getHealth() <= 0) {
+					printEndGame();
 					break;
 				}
 				System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
@@ -197,7 +208,7 @@ public class GameDriver {
 				} else {
 					getMenuChoice();
 					if (choice == 3) {
-						System.out.println("Thank you for playing.");
+						printEndGame(); 
 						break;
 					} else if (choice == 2) {
 						continue;
@@ -220,12 +231,12 @@ public class GameDriver {
 		System.out.println(player.getName() + "'s current health: " + player.getHealth() + "\n");
 
 	}
-	
+
 	// Ask the player if they would like to play again
 	public int playAgain() {
-		int againChoice; 
+		int againChoice;
 		System.out.println("\n\nWould you like to play again?\n (1. Yes) (2. No) >> ");
-		againChoice = kb.nextInt();		
+		againChoice = kb.nextInt();
 		return againChoice;
 	}
 
@@ -325,10 +336,9 @@ public class GameDriver {
 
 		} while (choice != 3 && endChoice < 2);
 
-		System.out.println("\n\n\nThank you for playing Venture to the Venue!\n");
+		printEndGame();
 		printMusicNotes();
 
 	}
-
 
 }

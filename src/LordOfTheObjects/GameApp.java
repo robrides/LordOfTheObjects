@@ -3,6 +3,13 @@ package LordOfTheObjects;
 public class GameApp {
 
 	public static void main(String[] args) {
+		GameApp gApp = new GameApp();
+
+		gApp.start();
+
+	}
+
+	private void start() {
 
 		// Instantiate GameDriver
 		GameDriver game = new GameDriver();
@@ -12,5 +19,3 @@ public class GameApp {
 
 	}
 }
-
-
